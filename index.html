@@ -10,8 +10,8 @@
     <link rel="icon" href="/favicon.png" type="image/png">
 </head>
 <body>
-    <script type="text/javascript" src="turn.min.js "></script> 
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="turn.min.js "></script> 
     <div id="wrap">
         <header>
             <div class="title">ОБОИ КЛЕШ РОЯЛЬ</div>
@@ -21,7 +21,7 @@
     <section id="images">
         <ul id="imageList"></ul>
         <script>
-            fetch('http://127.0.0.1:80/getAll')
+            fetch('http://164.92.229.214:80/getAll')
                 .then(response => response.json())
                 .then(images => {
                     const container = document.getElementById('imageList');
@@ -47,7 +47,7 @@
                 .catch(error => console.error('Error fetching images:', error));
             
             function loadRandomImage() {
-                fetch('http://127.0.0.1:80/random')
+                fetch('http://164.92.229.214:80/random')
                     .then(response => response.text())
                     .then(randomImage => {
                     window.open(randomImage, '_blank'); // Open the random image source in a new tab
