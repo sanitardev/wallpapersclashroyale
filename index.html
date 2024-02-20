@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Обои клеш рояль</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+    <div id="wrap">
+        <header>
+            <div class="title">ОБОИ КЛЕШ РОЯЛЬ</div>
+            <div class="random-button" onclick="loadRandomImage()">СЛУЧАЙНЫЕ ОБОИ</div>
+        </header>
+    </div>
+    <section id="images">
+        <ul id="imageList"></ul>
+        <script>
+            fetch('http://127.0.0.1:80/getAll')
+                .then(response => response.json())
+                .then(images => {
+                    const container = document.getElementById('imageList');
+    
+                    images.forEach(image => {
+                        const liElement = document.createElement('li');
+                        const imgElement = document.createElement('img');
+                        imgElement.src = image;
+                        imgElement.className = 'scalable-module';
+                        imgElement.title = 'wallpaper';
+
+                        imgElement.addEventListener('click', () => {
+                            window.open(image, '_blank'); // Open the image source in a new tab
+                        });
+
+                        // Append the image element to the list item
+                        liElement.appendChild(imgElement);
+
+                        // Append the list item to the image list
+                        imageList.appendChild(liElement);
+                    });
+                })
+                .catch(error => console.error('Error fetching images:', error));
+            
+            function loadRandomImage() {
+                fetch('http://127.0.0.1:80/random')
+                    .then(response => response.text())
+                    .then(randomImage => {
+                    window.open(randomImage, '_blank'); // Open the random image source in a new tab
+                })
+                    .catch(error => console.error('Error fetching random image:', error));
+            }
+        </script>
+    </section>
+</body>
+</html>
